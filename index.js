@@ -1,6 +1,6 @@
-import * as Either from './src/Either'
-import FrozenArray from './src/FrozenArray'
-import Id from './src/Id'
-import Maybe from './src/Maybe'
+import * as Either from './src/either'
+import List from './src/list'
+import Id from './src/id'
+import Maybe from './src/maybe'
 
-export { Either, FrozenArray, Id, Maybe }
+export { Either, List, Id, Maybe }

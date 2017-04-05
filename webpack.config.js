@@ -16,7 +16,7 @@ module.exports = {
     'compose/map': './compose/map.js',
     'console/log': './console/log.js',
     either: './either/index.js',
-    frozenArray: './frozenArray/index.js',
+    list: './list/index.js',
     future: './future/index.js',
     id: './id/index.js',
     maybe: './maybe/index.js',

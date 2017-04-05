@@ -49,13 +49,13 @@ const { Left, Right, fromNullable } = Either
 ...
 ```
 
-# ऊंचा Oncha FrozenArray
+# ऊंचा Oncha List
 An immutable array implementation of with head, tail, fold methods.
 
 ``` javascript
-import Fa from 'oncha/frozenArray'
+import List from 'oncha/list'
 
-Fa([2, 4, 6])
+List([2, 4, 6])
   .map(num => num * 2)
   .filter(num => num > 5)
   .fold(console.log)
