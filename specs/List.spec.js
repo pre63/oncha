@@ -1,5 +1,6 @@
 import assert from 'assert'
 import List from '../package/list'
+import Id from '../package/id'
 
 const list = List([1, 2, 3])
 const head = list.head()
@@ -54,4 +55,36 @@ describe('A List', () => {
 
   it('should have a lenght of 4', () =>
     assert.equal(list.concat([5], [6, 7]).length(), 6))
+
+  it('shoud reduce arrays to a single value', () =>
+    Id(List([1, 2, 3])
+      .reduce(acc => x => acc + x)(0))
+      .map(a => a === 6)
+      .map(assert))
+
+  it('shoud reduce arrays to a single array', () =>
+    Id(List([[1], [2], [3]])
+      .reduce(acc => x => acc.concat(x))([]))
+      .map(a => assert.deepEqual(a, [1, 2, 3])))
+
+  it('shoud reduce arrays to a single array when empty', () =>
+    Id(List([[], [], []])
+      .reduce(acc => x => acc.concat(x))([]))
+      .map(a => assert.deepEqual(a, [])))
+
+  it('shoud reduceRight arrays to a single value', () =>
+    Id(List([1, 2, 3])
+      .reduceRight(acc => x => acc + x)(0))
+      .map(a => a === 6)
+      .map(assert))
+
+  it('shoud reduceRight arrays to a single array', () =>
+    Id(List([[1], [2], [3]])
+      .reduceRight(acc => x => acc.concat(x))([]))
+      .map(a => assert.deepEqual(a, [3, 2, 1])))
+
+  it('shoud reduceRight arrays to a single array when empty', () =>
+    Id(List([[], [], []])
+      .reduceRight(acc => x => acc.concat(x))([]))
+      .map(a => assert.deepEqual(a, [])))
 })
