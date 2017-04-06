@@ -5,7 +5,7 @@ const isFunction = func =>
   !!(func && func.constructor && func.call && func.apply)
 
 // List :: Array -> List
-const List = array => Id(array || []).map(Object.freeze).chain(list => ({
+const List = array => Id(Array.isArray(array) ? array : []).chain(list => ({
     // head :: () -> List
     head: () => List(list.slice(0, 1)),
     // tail :: () -> List
