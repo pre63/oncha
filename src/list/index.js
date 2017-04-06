@@ -34,10 +34,10 @@ const List = array => Id(array || []).map(Object.freeze).chain(list => ({
     lastIndexOf: x => list.lastIndexOf(x),
     // map :: (Any -> Any) -> List
     map: f => List(list.map(f)),
-    // reduce :: (a -> b -> b) -> b -> List of a -> b
-    reduce: f => a => list.reduce(f, a),
+    // reduce :: (b -> a -> b) -> b -> List of a -> b
+    reduce: f => a => list.reduce((acc, elem) => f(acc)(elem), a),
     // reduceRight :: (b -> a -> b) -> b -> List of a -> b
-    reduceRight: f => a => list.reduceRight(f, a),
+    reduceRight: f => a => list.reduceRight((acc, elem) => f(acc)(elem), a),
     // reverse :: () -> List
     reverse: () => List(list.reverse()),
     // slice :: Number -> Number -> List
