@@ -18,7 +18,7 @@ const List = array => Id(array || []).map(Object.freeze).chain(list => ({
     concat: (...y) => List(list.concat(...y)),
     // length :: () -> Number
     length: () => list.length,
-    // every :: () -> Boolean
+    // every :: (Any -> Boolean) -> Boolean
     every: f => list.every(f),
     // filter :: (Any -> Boolean) -> List
     filter: f => List(list.filter(f)),

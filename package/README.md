@@ -70,6 +70,7 @@ Compose implementation, takes n functions as parameters and return a function.
 
 ``` javascript
 import compose from 'oncha/compose'
+import log from 'oncha/console/log'
 
 const transform = compose(sentence => sentence.toUpperString(), sentence => `${sentence}!`)
 const logTransform = compose(log, transform)
