@@ -11,11 +11,12 @@ Identity monad implementation.
 
 ``` javascript
 import Id from 'oncha/id'
+import log from 'oncha/console/log'
 
 Id(5)
   .map(num => num * 7)
   .map(num => num - 1)
-  .fold(console.log)
+  .fold(log)
 //=> 34
 ```
 
@@ -24,19 +25,20 @@ Maybe monad implementation.
 
 ``` javascript
 import Maybe from 'oncha/maybe'
+import log from 'oncha/console/log'
 
 // Maybe of a string
 Maybe('Hello exalted one')
   .map(sentence => sentence.toUpperString())
   .map(sentence => `${sentence}!`)
-  .fold(console.log)
+  .fold(log)
 //=> 'HELLO EXALTED ONE!'
 
 // Maybe of nothing
 Maybe(null)
   .map(sentence => sentence.toUpperString())
   .else(() => 'Maybe received a null')
-  .fold(console.log)
+  .fold(log)
 //=> 'Maybe received a null'
 ```
 
@@ -54,11 +56,12 @@ An immutable array implementation of with head, tail, fold methods.
 
 ``` javascript
 import List from 'oncha/list'
+import log from 'oncha/console/log'
 
 List([2, 4, 6])
   .map(num => num * 2)
   .filter(num => num > 5)
-  .fold(console.log)
+  .fold(log)
 //=> [8, 12]
 ```
 

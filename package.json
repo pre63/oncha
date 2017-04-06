@@ -9,7 +9,9 @@
   "contributors": [
     "Simon Deshaies",
     "Ysael Pepin",
-    "Guillaume Martin"
+    "Guillaume Martin",
+    "Olivier Leduc",
+    "Olivier Melancon"
   ],
   "engines": {
     "node": ">=6"

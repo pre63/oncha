@@ -53,5 +53,5 @@ describe('A List', () => {
     assert.equal(List.of([1, 2, 3]).slice(0)(1).inspect(), 'List([1])'))
 
   it('should have a lenght of 4', () =>
-    assert.equal(list.concat([5]).length(), 4))
+    assert.equal(list.concat([5], [6, 7]).length(), 6))
 })

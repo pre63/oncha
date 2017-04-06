@@ -1,7 +1,7 @@
 {
   "name": "oncha",
   "description": "ऊंचा Oncha - A modular exalted javascript monadic library & functional fun.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "homepage": "https://github.com/aldo-dev/oncha",
   "repository": "https://github.com/aldo-dev/oncha.git",
   "bugs": {
@@ -12,7 +12,9 @@
   "license": "MIT",
   "contributors": [
     "Simon Deshaies",
+    "Ysael Pepin",
     "Guillaume Martin",
-    "Ysael Pepin"
+    "Olivier Leduc",
+    "Olivier Melancon"
   ]
 }
