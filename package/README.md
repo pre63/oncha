@@ -4,10 +4,10 @@ A modular exalted javascript monadic library & functional fun. [fantasy-land](ht
 | Name              | [Apply][8]   | [Applicative][4] | [Setoid][1]  | [Semigroup][2] | [Foldable][6]| [Functor][3] | [Monad][5] | [Chain][7]    |
 | ----------------- | :----------: | :--------------: | :----------: | :------------: | :----------: | :----------: | :--------: | :-----------: |
 | [Either](#either) |    **✔︎**     |      **✔︎**       |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |   **✔︎**    |     **✔︎**     |
-| [Future](#future) |              |                  |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |            |     **✔︎**     |
+| [Future](#future) |    **✔︎**     |                  |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |            |     **✔︎**     |
 | [Identity](#id)   |    **✔︎**     |      **✔︎**       |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |   **✔︎**    |     **✔︎**     |
 | [Maybe](#maybe)   |    **✔︎**     |      **✔︎**       |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |   **✔︎**    |     **✔︎**     |
-| [List](#list)     |              |                  |    **✔︎**     |     **✔︎**      |     **✔︎**    |     **✔︎**    |            |     **✔︎**     |
+| [List](#list)     |    **✔︎**     |                  |    **✔︎**     |     **✔︎**      |     **✔︎**    |     **✔︎**    |            |     **✔︎**     |
 
 * There is a divergence form fanasy land where `reduce` is named `fold` for some types.
 
@@ -512,7 +512,7 @@ fork(a => a)(b => b)(fut)
 ```
 
 # ऊंचा Oncha Curry
-Curries a function.
+Creates a partially applicable function.
 
 ``` javascript
 import curry from 'oncha/curry'
