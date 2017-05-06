@@ -4,4 +4,4 @@ import compose from 'compose'
 const map = f => functor => functor.map(f)
 
 // composeMap :: ... -> (Any -> Any)
-export default (...args) => compose(map, compose(...args))
+export default (...functions) => functor => functions.reduceRight((acc, f) => map(f)(acc), functor)
