@@ -80,17 +80,21 @@ describe('A Maybe', () => {
       assert.deepEqual(
         v.ap(u.ap(a.map(f => g => x => f(g(x))))).inspect(),
         v.ap(u).ap(a).inspect()))
+
     it('is an Apply solves to 170', () =>
       assert.deepEqual(v.ap(u.ap(a.map(f => g => x => f(g(x))))).fold(), 170))
+
     it('is an Apply solves to 170', () =>
       assert.deepEqual(v.ap(u).ap(a).fold(), 170))
 
     it('is an Applicative identity', () =>
       assert.equal(v.ap(Maybe.of(x => x)).inspect(), v.inspect()))
+
     it('is an Applicative homomorphism', () =>
       assert.equal(
         Maybe.of(10).ap(Maybe.of(add(78))).inspect(),
         Maybe.of(add(78)(10)).inspect()))
+
     it('is an Applicative interchange', () =>
       assert.equal(
         Maybe.of(10).ap(u).inspect(),

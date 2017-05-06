@@ -29,17 +29,21 @@ describe('A Id', () => {
       assert.deepEqual(
         v.ap(u.ap(a.map(f => g => x => f(g(x))))).inspect(),
         v.ap(u).ap(a).inspect()))
+
     it('is an Apply solves to 170', () =>
       assert.deepEqual(v.ap(u.ap(a.map(f => g => x => f(g(x))))).fold(), 170))
+
     it('is an Apply solves to 170', () =>
       assert.deepEqual(v.ap(u).ap(a).fold(), 170))
 
     it('is an Applicative identity', () =>
       assert.equal(v.ap(Id.of(x => x)).inspect(), v.inspect()))
+
     it('is an Applicative homomorphism', () =>
       assert.equal(
         Id.of(10).ap(Id.of(add(78))).inspect(),
         Id.of(add(78)(10)).inspect()))
+
     it('is an Applicative interchange', () =>
       assert.equal(
         Id.of(10).ap(u).inspect(),
@@ -47,7 +51,7 @@ describe('A Id', () => {
   })
 
   it('will map to uppercase', () => {
-    Id('Simon').map(x => x.toUpperCase()).fold(x => assert.equal(x, 'SIMON'))
+    Id('Exalted').map(x => x.toUpperCase()).fold(x => assert.equal(x, 'EXALTED'))
   })
 
   it('of will return a new Id', () => {
