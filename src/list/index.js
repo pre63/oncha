@@ -1,4 +1,5 @@
 import Id from 'id'
+import curry from 'curry'
 
 // isFunction :: Any -> Boolean
 const isFunction = func =>
@@ -42,7 +43,7 @@ const List = array =>
     // reverse :: () -> List
     reverse: () => List(list.reverse()),
     // slice :: Number -> Number -> List
-    slice: begin => end => List(list.slice(begin, end)),
+    slice: curry((begin, end) => List(list.slice(begin, end))),
     // some :: (Any -> Boolean) -> Boolean
     some: f => list.some(f),
     // of :: Array -> List

@@ -1,5 +1,8 @@
+import curry from 'curry'
+
 // fork :: (ƒ -> ƒ -> Any) -> ƒ -> ƒ -> Future
-const fork = action => (error, success) => Future.of(action(error, success))
+const fork = action =>
+  curry((error, success) => Future.of(action(error, success)))
 
 // chain :: (ƒ -> ƒ -> Any) -> (Any -> Future) -> Future
 const chain = action => func =>
@@ -10,10 +13,8 @@ const chain = action => func =>
 const Future = action => ({
   // map :: (Any -> Any) -> Future
   map: func => chain(action)(x => Future.of(func(x))),
-
   // chain :: (Any -> Future) -> Future
   chain: chain(action),
-
   // fork :: ƒ -> ƒ -> Any
   fork: fork(action)
 })

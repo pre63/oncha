@@ -1,3 +1,4 @@
+import curry from 'curry'
 import isNull from 'isNull'
 
 // fromNullable :: Any -> Left | Right
@@ -10,9 +11,7 @@ export const Right = x => ({
   // map :: ƒ -> Right
   map: f => Right(f(x)),
   // fold :: (ƒ, ƒ) -> Any
-  fold: (f, g) => g(x),
-  // fromNullable :: Any -> Left | Right
-  fromNullable,
+  fold: curry((f, g) => g(x)),
   // inspect :: -> String
   inspect: () => `Right(${x})`
 })
@@ -28,8 +27,6 @@ export const Left = x => ({
   map: () => Left(x),
   // fold :: (ƒ, ƒ) -> Any
   fold: f => f(x),
-  // fromNullable :: Any -> Left | Right
-  fromNullable,
   // inspect :: -> String
   inspect: () => `Left(${x})`
 })
