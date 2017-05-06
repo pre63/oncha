@@ -1,13 +1,13 @@
 # ऊंचा Oncha
-A modular exalted javascript monadic library & functional fun. Inpired by [fantasy-land](https://github.com/fantasyland/fantasy-land).
+A modular exalted javascript monadic library & functional fun. [fantasy-land](https://github.com/fantasyland/fantasy-land) compliant.
 
 | Name              | [Setoid][1]  | [Semigroup][2] | [Functor][3] | [Applicative][4] | [Monad][5] | [Foldable][6] | [Chain][7] |
 | ----------------- | :----------: | :------------: | :----------: | :--------------: | :--------: | :-----------: | :------------: |
 | [Either](#either) |    **✔︎**     |                |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
-| [Future](#future) |              |                |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
+| [Future](#future) |              |                |     **✔︎**    |                  |   **✔︎**    |     **✔︎**     |     **✔︎**      |
 | [Identity](#id)   |    **✔︎**     |                |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
 | [Maybe](#maybe)   |    **✔︎**     |                |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
-| [List](#list)     |              |     **✔︎**      |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
+| [List](#list)     |              |     **✔︎**      |     **✔︎**    |                  |   **✔︎**    |     **✔︎**     |     **✔︎**      |
 
 
 ## Install
@@ -129,7 +129,6 @@ Future.fromPromise(fetch('https://api.awesome.com/catOfTheDay'))
     err => log('There was an error fetching the cat of the day :('),
     facts => log('Facts for cat of the day: ' + facts))
 //=> 'Facts for cat of the day: Garfield is awesome.'
-
 ```
 
 # ऊंचा Oncha Compose
