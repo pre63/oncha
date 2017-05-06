@@ -10,7 +10,7 @@ const Nothing = () => ({
   // else :: ƒ -> Maybe
   else: f => Maybe(f()),
   // fold :: ƒ -> Any
-  fold: f => f(),
+  fold: (f = a => a) => f(),
   // Any -> Maybe
   of: x => Maybe(x),
   // inspect :: ƒ -> String
@@ -29,7 +29,7 @@ const Maybe = x =>
             // map :: ƒ -> Maybe
             map: f => Maybe(f(x)),
             // fold :: ƒ -> Any
-            fold: f => f(x),
+            fold: (f = a => a) => f(x),
             // else :: ƒ -> Maybe
             else: () => Maybe(x),
             // Any -> Maybe

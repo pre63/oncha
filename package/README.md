@@ -136,3 +136,30 @@ const logTransform = compose(log, transform)
 logTransform('Hello exalted one')
 //=> 'HELLO EXALTED ONE!'
 ```
+
+# ऊंचा Oncha Fork
+Fork as partial application and first class.
+
+``` javascript
+import fork from 'oncha/fork'
+import future from 'oncha/future'
+
+const fut = Future.of('EXALTED!')
+
+fork(a => a)(b => b)(fut)
+//=> 'EXALTED!'
+```
+
+# ऊंचा Oncha Curry
+Curries a function.
+
+``` javascript
+import curry from 'oncha/curry'
+
+const curried = curry((a, b) => a * b);
+curried(3)(6);
+// 18
+
+curry((a, b, c) => a + b + c)(1, 2, 3)
+// 6
+```

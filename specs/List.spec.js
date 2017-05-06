@@ -79,4 +79,21 @@ describe('A List', () => {
   it('shoud reduceRight arrays to a single array when empty', () =>
     Id(List([[], [], []]).reduceRight(acc => x => acc.concat(x))([])).map(a =>
       assert.deepEqual(a, [])))
+
+  describe('Fold', () => {
+    it('Should fold without a function', () =>
+      Id(List([1, 2, 3, 4]).fold()).map(a => assert.deepEqual(a, [1, 2, 3, 4])))
+
+    it('Should fold with a function', () =>
+      Id(List([1, 2, 3, 4]).fold(a => a)).map(a =>
+        assert.deepEqual(a, [1, 2, 3, 4])))
+
+    it('Should fold with a null function', () =>
+      Id(List([1, 2, 3, 4]).fold(null)).map(a =>
+        assert.deepEqual(a, [1, 2, 3, 4])))
+
+    it('Should fold with an object', () =>
+      Id(List([1, 2, 3, 4]).fold({})).map(a =>
+        assert.deepEqual(a, [1, 2, 3, 4])))
+  })
 })

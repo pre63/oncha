@@ -16,7 +16,9 @@ const Future = action => ({
   // chain :: (Any -> Future) -> Future
   chain: chain(action),
   // fork :: ƒ -> ƒ -> Any
-  fork: fork(action)
+  fork: fork(action),
+  // fold:: (a -> a) -> a
+  fold: (f = a => a) => action(f, f)
 })
 
 // of :: Any -> Future
