@@ -1,5 +1,14 @@
 # ऊंचा Oncha
-A modular exalted javascript monadic library & functional fun.
+A modular exalted javascript monadic library & functional fun. Inpired by [fantasy-land](https://github.com/fantasyland/fantasy-land).
+
+| Name              | [Setoid][1]  | [Semigroup][2] | [Functor][3] | [Applicative][4] | [Monad][5] | [Foldable][6] | [Chain][7] |
+| ----------------- | :----------: | :------------: | :----------: | :--------------: | :--------: | :-----------: | :------------: |
+| [Either](#either) |    **✔︎**     |                |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
+| [Future](#future) |              |                |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
+| [Identity](#id)   |    **✔︎**     |                |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
+| [Maybe](#maybe)   |    **✔︎**     |                |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
+| [List](#list)     |              |     **✔︎**      |     **✔︎**    |      **✔︎**       |   **✔︎**    |     **✔︎**     |     **✔︎**      |
+
 
 ## Install
 ``` bash
@@ -163,3 +172,12 @@ curried(3)(6);
 curry((a, b, c) => a + b + c)(1, 2, 3)
 // 6
 ```
+
+
+[1]: https://github.com/fantasyland/fantasy-land#setoid
+[2]: https://github.com/fantasyland/fantasy-land#semigroup
+[3]: https://github.com/fantasyland/fantasy-land#functor
+[4]: https://github.com/fantasyland/fantasy-land#applicative
+[5]: https://github.com/fantasyland/fantasy-land#monad
+[6]: https://github.com/fantasyland/fantasy-land#foldable
+[7]: https://github.com/fantasyland/fantasy-land#chain

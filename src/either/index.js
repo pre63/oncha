@@ -8,6 +8,8 @@ export const fromNullable = x => (isNull(x) ? Left : Right)(x)
 export const Right = x => ({
   // chain :: ƒ -> Monad
   chain: f => f(x),
+  // equals :: Right -> Boolean
+  equals: (r, e = a => a === x) => r.fold(e, e),
   // map :: ƒ -> Right
   map: f => Right(f(x)),
   // fold :: (a -> a, a -> a) -> Any
@@ -23,6 +25,8 @@ Right.of = x => Right(x)
 export const Left = x => ({
   // chain :: ƒ -> Left
   chain: () => Left(x),
+  // equals :: Right -> Boolean
+  equals: (r, e = a => a === x) => r.fold(e, e),
   // map :: ƒ -> Left
   map: () => Left(x),
   // fold :: (ƒ, ƒ) -> Any

@@ -53,4 +53,19 @@ describe('A Maybe', () => {
         .fold(x => assert(x === 'hello world'))
     })
   })
+
+  describe('as a Setoid', () => {
+    const a = Maybe(2)
+    const b = Maybe(2)
+    const c = Maybe(2)
+
+    it('should equal another right of the same value (reflexivity)', () =>
+      assert.equal(a.equals(a), true))
+
+    it('should equal the result of another equal (symmetry)', () =>
+      assert.equal(a.equals(b), b.equals(a)))
+
+    it('should equal the result of another equal (transitivity)', () =>
+      assert.equal(a.equals(b) === b.equals(c) === a.equals(c), true))
+  })
 })

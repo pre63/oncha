@@ -2,6 +2,8 @@
 const Id = x => ({
   // chain :: ƒ -> Monad
   chain: f => f(x),
+  // equals :: Right -> Boolean
+  equals: (r, e = a => a === x) => r.fold(e, e),
   // map :: ƒ -> Id
   map: f => Id(f(x)),
   // fold :: ƒ -> Any

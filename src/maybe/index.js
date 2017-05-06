@@ -26,6 +26,8 @@ const Maybe = x =>
         : {
             // chain :: ƒ -> Any
             chain: f => f(x),
+            // equals :: Right -> Boolean
+            equals: (r, e = a => a === x) => r.fold(e, e),
             // map :: ƒ -> Maybe
             map: f => Maybe(f(x)),
             // fold :: ƒ -> Any

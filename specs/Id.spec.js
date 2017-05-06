@@ -61,4 +61,19 @@ describe('A Id', () => {
     const value = Id(Id(12)).chain(x => x).fold(x => x)
     assert(value === 12)
   })
+
+  describe('as a Setoid', () => {
+    const a = Id(2)
+    const b = Id(2)
+    const c = Id(2)
+
+    it('should equal another right of the same value (reflexivity)', () =>
+      assert.equal(a.equals(a), true))
+
+    it('should equal the result of another equal (symmetry)', () =>
+      assert.equal(a.equals(b), b.equals(a)))
+
+    it('should equal the result of another equal (transitivity)', () =>
+      assert.equal(a.equals(b) === b.equals(c) === a.equals(c), true))
+  })
 })
