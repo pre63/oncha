@@ -42,10 +42,7 @@ describe('A List', () => {
     assert.equal(List.of([1, 2, 3]).join(), '1,2,3'))
 
   it('should double values calling map', () =>
-    assert.equal(
-      List.of([1, 2, 3]).map(x => x * 2).inspect(),
-      'List([2,4,6])'
-    ))
+    assert.equal(List.of([1, 2, 3]).map(x => x * 2).inspect(), 'List([2,4,6])'))
 
   it('should be true caling some (x === 3)', () =>
     assert.equal(List.of([1, 2, 3]).some(x => x === 3), true))
@@ -76,7 +73,8 @@ describe('A List', () => {
 
   it('shoud reduceRight arrays to a single array', () =>
     Id(
-      List([[1], [2], [3]]).reduceRight(acc => x => acc.concat(x))([])).map(a => assert.deepEqual(a, [3, 2, 1])))
+      List([[1], [2], [3]]).reduceRight(acc => x => acc.concat(x))([])
+    ).map(a => assert.deepEqual(a, [3, 2, 1])))
 
   it('shoud reduceRight arrays to a single array when empty', () =>
     Id(List([[], [], []]).reduceRight(acc => x => acc.concat(x))([])).map(a =>

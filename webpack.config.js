@@ -5,8 +5,8 @@ const path = require('path')
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    'compose/index': './compose/index.js',
-    'compose/map': './compose/map.js',
+    compose: './compose/index.js',
+    map: './map/index.js',
     either: './either/index.js',
     list: './list/index.js',
     future: './future/index.js',

@@ -2,10 +2,9 @@
 const fork = action => (error, success) => Future.of(action(error, success))
 
 // chain :: (ƒ -> ƒ -> Any) -> (Any -> Future) -> Future
-const chain = action =>
-  func =>
-    Future((reject, resolve) =>
-      fork(action)(e => reject(e), data => func(data).fork(reject, resolve)))
+const chain = action => func =>
+  Future((reject, resolve) =>
+    fork(action)(e => reject(e), data => func(data).fork(reject, resolve)))
 
 // Future :: (ƒ -> ƒ -> Any) -> Future
 const Future = action => ({
@@ -16,7 +15,7 @@ const Future = action => ({
   chain: chain(action),
 
   // fork :: ƒ -> ƒ -> Any
-  fork: fork(action),
+  fork: fork(action)
 })
 
 // of :: Any -> Future

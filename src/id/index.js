@@ -11,7 +11,7 @@ const Id = x => ({
   // of :: Any -> Id
   of: x => Id(x),
   // inspect :: -> String
-  inspect: () => `Id(${x})`,
+  inspect: () => `Id(${x})`
 })
 
 // of :: Any -> Id

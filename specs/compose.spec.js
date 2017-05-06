@@ -1,6 +1,5 @@
 import assert from 'assert'
 import compose from '../package/compose'
-import map from '../package/compose/map'
 
 describe('A compose', () => {
   it('will compose one function', () =>
@@ -25,14 +24,8 @@ describe('A compose', () => {
     assert.equal(compose((a, b) => a + b)(1, 2), 3))
 
   it('will compose two functions with 2 arguments', () =>
-    assert.equal(compose(a => a, (a, b) => (a + b))(1, 2), 3))
+    assert.equal(compose(a => a, (a, b) => a + b)(1, 2), 3))
 
   it('will compose three functions with 3 arguments', () =>
-    assert.equal(compose(a => a, (a, b, c) => (a + b + c))(1, 2, 3), 6))
-
-  it('will compose map 1 function with 1 arguments', () =>
-    assert.deepEqual(map(a => a * 2)([1, 2, 3]), [2, 4, 6]))
-
-  it('will compose map 2 function with 1 arguments', () =>
-    assert.deepEqual(map(a => a * 7, a => a * 2)([1, 2, 3]), [14, 28, 42]))
+    assert.equal(compose(a => a, (a, b, c) => a + b + c)(1, 2, 3), 6))
 })

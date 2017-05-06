@@ -14,11 +14,12 @@ const Nothing = () => ({
   // Any -> Maybe
   of: x => Maybe(x),
   // inspect :: ƒ -> String
-  inspect: () => 'Nothing()',
+  inspect: () => 'Nothing()'
 })
 
 // Maybe :: Any -> Maybe
-const Maybe = x => Id(x).map(isNull).fold(
+const Maybe = x =>
+  Id(x).map(isNull).fold(
     nulled =>
       nulled
         ? Nothing()
@@ -34,9 +35,8 @@ const Maybe = x => Id(x).map(isNull).fold(
             // Any -> Maybe
             of: x => Maybe(x),
             // inspect :: -> String
-            inspect: () => `Maybe(${x})`,
-          }
-  )
+            inspect: () => `Maybe(${x})`
+          })
 
 // Any -> Maybe
 Maybe.of = x => Maybe(x)

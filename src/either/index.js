@@ -14,7 +14,7 @@ export const Right = x => ({
   // fromNullable :: Any -> Left | Right
   fromNullable,
   // inspect :: -> String
-  inspect: () => `Right(${x})`,
+  inspect: () => `Right(${x})`
 })
 
 // of :: Any -> Right
@@ -31,7 +31,7 @@ export const Left = x => ({
   // fromNullable :: Any -> Left | Right
   fromNullable,
   // inspect :: -> String
-  inspect: () => `Left(${x})`,
+  inspect: () => `Left(${x})`
 })
 
 // of :: Any -> Left
@@ -41,7 +41,7 @@ Left.of = x => Left(x)
 export const Either = {
   fromNullable,
   Left,
-  Right,
+  Right
 }
 
 export default Either

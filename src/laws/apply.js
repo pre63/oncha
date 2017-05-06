@@ -5,8 +5,7 @@ const compose = f => g => x => f(g(x))
 const identity = a => a
 
 // apply :: ƒ -> (ƒ -> ( -> Boolean))
-export const apply = t =>
-  eq =>
-    () => (y => eq(y.ap(y.ap(y.map(compose))), y.ap(y).ap(y)))(t.of(identity))
+export const apply = t => eq => () =>
+  (y => eq(y.ap(y.ap(y.map(compose))), y.ap(y).ap(y)))(t.of(identity))
 
 export default apply

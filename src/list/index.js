@@ -12,7 +12,7 @@ const List = array =>
     // tail :: () -> List
     tail: () => List(list.slice(1)),
     // fold :: (Any -> Any) -> Array
-    fold: f => isFunction(f) ? f(list) : list,
+    fold: f => (isFunction(f) ? f(list) : list),
     // nth :: Number -> Any
     nth: x => list[x],
     // concat :: List... -> List
@@ -46,7 +46,7 @@ const List = array =>
     // some :: (Any -> Boolean) -> Boolean
     some: f => list.some(f),
     // of :: Array -> List
-    of: List,
+    of: List
   }))
 
 // Array -> List
