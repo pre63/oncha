@@ -18,6 +18,34 @@ describe('A Id', () => {
     it('is associative', () => associativity(Id)(eq)(7))
   })
 
+  describe('as a applicative', () => {
+    const add = a => b => a + b
+    const mul = a => b => a * b
+    const a = Id(mul(10))
+    const u = Id(add(7))
+    const v = Id(10)
+
+    it('is an Apply', () =>
+      assert.deepEqual(
+        v.ap(u.ap(a.map(f => g => x => f(g(x))))).inspect(),
+        v.ap(u).ap(a).inspect()))
+    it('is an Apply solves to 170', () =>
+      assert.deepEqual(v.ap(u.ap(a.map(f => g => x => f(g(x))))).fold(), 170))
+    it('is an Apply solves to 170', () =>
+      assert.deepEqual(v.ap(u).ap(a).fold(), 170))
+
+    it('is an Applicative identity', () =>
+      assert.equal(v.ap(Id.of(x => x)).inspect(), v.inspect()))
+    it('is an Applicative homomorphism', () =>
+      assert.equal(
+        Id.of(10).ap(Id.of(add(78))).inspect(),
+        Id.of(add(78)(10)).inspect()))
+    it('is an Applicative interchange', () =>
+      assert.equal(
+        Id.of(10).ap(u).inspect(),
+        u.ap(Id.of(f => f(10))).inspect()))
+  })
+
   it('will map to uppercase', () => {
     Id('Simon').map(x => x.toUpperCase()).fold(x => assert.equal(x, 'SIMON'))
   })

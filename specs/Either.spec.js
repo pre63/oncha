@@ -63,4 +63,66 @@ describe('A Either', () => {
         true
       ))
   })
+
+  describe('as a Right and as a applicative', () => {
+    const add = a => b => a + b
+    const mul = a => b => a * b
+    const a = Right(mul(10))
+    const u = Right(add(7))
+    const v = Right(10)
+
+    it('is an Apply', () =>
+      assert.deepEqual(
+        v.ap(u.ap(a.map(f => g => x => f(g(x))))).inspect(),
+        v.ap(u).ap(a).inspect()))
+    it('is an Apply solves to 170 a', () =>
+      assert.deepEqual(
+        v.ap(u.ap(a.map(f => g => x => f(g(x))))).fold(a => a),
+        170
+      ))
+    it('is an Apply solves to 170 b', () =>
+      assert.deepEqual(v.ap(u).ap(a).fold(a => a), 170))
+
+    it('is an Applicative identity', () =>
+      assert.equal(v.ap(Right.of(x => x)).inspect(), v.inspect()))
+    it('is an Applicative homomorphism', () =>
+      assert.equal(
+        Right.of(10).ap(Right.of(add(78))).inspect(),
+        Right.of(add(78)(10)).inspect()))
+    it('is an Applicative interchange', () =>
+      assert.equal(
+        Right.of(10).ap(u).inspect(),
+        u.ap(Right.of(f => f(10))).inspect()))
+  })
+
+  describe('as a Left and as a applicative', () => {
+    const add = a => b => a + b
+    const mul = a => b => a * b
+    const a = Left(mul(10))
+    const u = Left(add(7))
+    const v = Left(10)
+
+    it('is an Apply', () =>
+      assert.deepEqual(
+        v.ap(u.ap(a.map(f => g => x => f(g(x))))).inspect(),
+        v.ap(u).ap(a).inspect()))
+    it('is an Apply solves to 170', () =>
+      assert.deepEqual(
+        v.ap(u.ap(a.map(f => g => x => f(g(x))))).fold(a => a),
+        10
+      ))
+    it('is an Apply solves to 170', () =>
+      assert.deepEqual(v.ap(u).ap(a).fold(a => a), 10))
+
+    it('is an Applicative identity', () =>
+      assert.equal(v.ap(Left.of(x => x)).inspect(), v.inspect()))
+    it('is an Applicative homomorphism', () =>
+      assert.equal(
+        Left.of(10).ap(Left.of(add(78))).inspect(),
+        Left.of(add(0)(10)).inspect()))
+    it('is an Applicative interchange', () =>
+      assert.equal(
+        Left.of(10).ap(u).inspect(),
+        v.ap(Left.of(f => f(10))).inspect()))
+  })
 })

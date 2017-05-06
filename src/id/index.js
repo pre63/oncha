@@ -1,15 +1,15 @@
 // Id :: Any -> Id
 const Id = x => ({
+  // ap :: Applicative -> Applicative
+  ap: app => app.map(f => f(x)),
   // chain :: ƒ -> Monad
   chain: f => f(x),
-  // equals :: Right -> Boolean
-  equals: (r, e = a => a === x) => r.fold(e, e),
+  // equals :: Id -> Boolean
+  equals: (id, e = a => a === x) => id.fold(e),
   // map :: ƒ -> Id
   map: f => Id(f(x)),
   // fold :: ƒ -> Any
   fold: (f = a => a) => f(x),
-  // ap :: ƒ -> Any
-  ap: f => x(f),
   // of :: Any -> Id
   of: x => Id(x),
   // inspect :: -> String
