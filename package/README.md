@@ -1,6 +1,39 @@
 # ऊंचा Oncha
 A modular exalted javascript monadic library & functional fun. [fantasy-land](https://github.com/fantasyland/fantasy-land) compliant.
 
+- [Install](#install)
+- [Types](#types)
+  * [All](#all)
+    + [ap](#ap)
+    + [equals](#equals)
+    + [chain](#chain)
+    + [map](#map)
+    + [of](#of)
+    + [inspect](#inspect)
+  * [Id](#id)
+    + [fold](#fold)
+  * [Maybe](#maybe)
+    + [else](#else)
+    + [fold](#fold-1)
+  * [Either](#either)
+    + [fold](#fold-2)
+  * [List](#list)
+  * [Future](#future)
+    + [fold](#fold-3)
+    + [fork](#fork)
+- [Higher Order](#higher-order)
+  * [Compose](#compose)
+  * [Curry](#curry)
+  * [Fork](#fork)
+  * [Map](#map)⏎
+
+# Install
+``` bash
+yarn add oncha
+```
+
+# Types
+
 | Name              | [Apply][8]   | [Applicative][4] | [Setoid][1]  | [Semigroup][2] | [Foldable][6]| [Functor][3] | [Monad][5] | [Chain][7]    |
 | ----------------- | :----------: | :--------------: | :----------: | :------------: | :----------: | :----------: | :--------: | :-----------: |
 | [Either](#either) |    **✔︎**     |      **✔︎**       |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |   **✔︎**    |     **✔︎**     |
@@ -11,26 +44,10 @@ A modular exalted javascript monadic library & functional fun. [fantasy-land](ht
 
 * There is a divergence form fanasy land where `reduce` is named `fold` for some types.
 
-## Install
-``` bash
-yarn add oncha
-```
+## All
+These functions are available on all types.
 
-# ऊंचा Oncha Id
-Identity monad.
-
-``` javascript
-import Id from 'oncha/id'
-import log from 'nyaya/console/log'
-
-Id(5)
-  .map(num => num * 7)
-  .map(num => num - 1)
-  .fold(log)
-//=> 34
-```
-
-## ap
+### ap
 [Apply][8]
 ```
 chain :: (a -> b) -> b
@@ -44,7 +61,7 @@ Id(Id(5)).chain(a => a)
 //=> Id(5)
 ```
 
-## equals
+### equals
 [Setoid][1]
 ```
 equals :: Id -> Boolean
@@ -60,7 +77,7 @@ Id(2).equals(Id(1)) === Id(1).equals(Id(1))
 //=> false
 ```
 
-## chain
+### chain
 [Chain][7]
 ```
 chain :: (a -> b) -> b
@@ -74,20 +91,7 @@ Id(Id(5)).chain(a => a)
 //=> Id(5)
 ```
 
-## fold
-[Foldable][6]
-```
-fold :: (a -> b) -> b
-```
-```javascript
-Id(5).fold()
-//=> 5
-
-Id(5).fold(a => a + 1)
-//=> 6
-```
-
-## map
+### map
 [Functor][3]
 ```
 map :: (a -> b) -> Id of b
@@ -97,7 +101,7 @@ Id(7).map(a => a * 2)
 //=> Id(14)
 ```
 
-## of
+### of
 [Applicative][4]
 ```
 of :: a -> Id of a
@@ -110,7 +114,7 @@ Id(5).of(Id(6))
 //=> Id(Id(6))
 ```
 
-## inspect
+### inspect
 ```
 inspect :: () -> String
 ```
@@ -119,7 +123,34 @@ Id(5).inspect()
 //=> Id(5)
 ```
 
-# ऊंचा Oncha Maybe
+## Id
+Identity monad.
+
+``` javascript
+import Id from 'oncha/id'
+import log from 'nyaya/console/log'
+
+Id(5)
+  .map(num => num * 7)
+  .map(num => num - 1)
+  .fold(log)
+//=> 34
+```
+
+### fold
+[Foldable][6]
+```
+fold :: (a -> b) -> b
+```
+```javascript
+Id(5).fold()
+//=> 5
+
+Id(5).fold(a => a + 1)
+//=> 6
+```
+
+## Maybe
 Maybe monad.
 
 ``` javascript
@@ -141,51 +172,7 @@ Maybe(null)
 //=> 'Maybe received a null'
 ```
 
-## ap
-[Apply][8]
-```
-chain :: (a -> b) -> b
-```
-```javascript
-Maybe(5).chain(a => Maybe(a))
-//=> Maybe(5)
-
-// You can use chain to join the monads.
-Maybe(Maybe(5)).chain(a => a)
-//=> Maybe(5)
-```
-
-## chain
-[Chain][7]
-```
-chain :: (a -> b) -> b
-```
-```javascript
-Maybe(5).chain(a => Maybe(a))
-//=> Maybe(5)
-
-// You can use chain to join the monads.
-Maybe(Maybe(5)).chain(a => a)
-//=> Maybe(5)
-```
-
-## equals
-[Setoid][1]
-```
-equals :: Maybe -> Boolean
-```
-```javascript
-Maybe(1).equals(Maybe(1))
-//=> true
-
-Maybe(2).equals(Maybe(1))
-//=> false
-
-Maybe(2).equals(Maybe(1)) === Maybe(1).equals(Maybe(1))
-//=> false
-```
-
-## else
+### else
 Sets the value to fold on.
 ```
 else :: Any -> Nothing of Any
@@ -198,7 +185,7 @@ Maybe(null).else(5).fold()
 //=> 5
 ```
 
-## fold
+### fold
 [Foldable][6]
 ```
 fold :: (a -> b) -> b
@@ -211,39 +198,7 @@ Maybe(5).fold(a => a + 1)
 //=> 6
 ```
 
-## map
-[Functor][3]
-```
-map :: (a -> b) -> Maybe of b
-```
-```javascript
-Maybe(7).map(a => a * 2)
-//=> Maybe(14)
-```
-
-## of
-[Applicative][4]
-```
-of :: a -> Maybe of a
-```
-```javascript
-Maybe(5).of(6)
-//=> Maybe(6)
-
-Maybe(5).of(Maybe(6))
-//=> Maybe(Maybe(6))
-```
-
-## inspect
-```
-inspect :: () -> String
-```
-```javascript
-Maybe(5).inspect()
-//=> Maybe(5)
-```
-
-# ऊंचा Oncha Either
+## Either
 An Either monad includes Left, Right, fromNullable.
 
 ``` javascript
@@ -278,51 +233,7 @@ extractEmail({ name: 'user' }
 //=> 'No email found!'
 ```
 
-## ap
-[Apply][8]
-```
-chain :: (a -> b) -> b
-```
-```javascript
-Right(5).chain(a => Right(a))
-//=> Right(5)
-
-// You can use chain to join the monads.
-Right(Right(5)).chain(a => a)
-//=> Right(5)
-```
-
-## chain
-[Chain][7]
-```
-chain :: (a -> b) -> b
-```
-```javascript
-Right(5).chain(a => Right(a))
-//=> Right(5)
-
-// You can use chain to join the monads.
-Right(Right(5)).chain(a => a)
-//=> Right(5)
-```
-
-## equals
-[Setoid][1]
-```
-equals :: Right -> Boolean
-```
-```javascript
-Right(1).equals(Right(1))
-//=> true
-
-Right(2).equals(Right(1))
-//=> false
-
-Right(2).equals(Right(1)) === Right(1).equals(Right(1))
-//=> false
-```
-
-## fold
+### fold
 [Foldable][6] - Folds on the first function for `Left` and the second for `Right`.
 ```
 fold :: (a -> a, b -> b) -> a | b
@@ -335,39 +246,7 @@ Left(5).fold(a => a + 1)
 //=> 6
 ```
 
-## map
-[Functor][3]
-```
-map :: (a -> b) -> Right of b
-```
-```javascript
-Right(7).map(a => a * 2)
-//=> Right(14)
-```
-
-## of
-[Applicative][4]
-```
-of :: a -> Right of a
-```
-```javascript
-Right(5).of(6)
-//=> Right(6)
-
-Right(5).of(Right(6))
-//=> Right(Right(6))
-```
-
-## inspect
-```
-inspect :: () -> String
-```
-```javascript
-Right(5).inspect()
-//=> Right(5)
-```
-
-# ऊंचा Oncha List
+## List
 List Monad.
 
 ``` javascript
@@ -381,7 +260,7 @@ List([2, 4, 6])
 //=> [8, 12]
 ```
 
-# ऊंचा Oncha Future
+## Future
 A Future monad for async computation.
 
 ``` javascript
@@ -412,21 +291,7 @@ Future.fromPromise(fetch('https://api.awesome.com/catOfTheDay'))
 //=> 'Facts for cat of the day: Garfield is awesome.'
 ```
 
-## chain
-[Chain][7]
-```
-chain :: (a -> b) -> b
-```
-```javascript
-Future(5).chain(a => Future(a))
-//=> Future(5)
-
-// You can use chain to join the monads.
-Future(Future(5)).chain(a => a)
-//=> Future(5)
-```
-
-## fold
+### fold
 [Foldable][6]
 ```
 fold :: (a -> b) -> b
@@ -439,7 +304,7 @@ Future.of(5).fold(a => a + 1)
 //=> 6
 ```
 
-## fork
+### fork
 Executes the `Future` returning a `Future` of the resuts.
 ```
 fork :: (a -> a, b -> b) -> Future of a | b
@@ -452,39 +317,8 @@ Future((left, right) => left(Error('this is an error'))).fork(a => a)
 //=> Future of Error
 ```
 
-## map
-[Functor][3]
-```
-map :: (a -> b) -> Future of b
-```
-```javascript
-Future(7).map(a => a * 2)
-//=> Future(14)
-```
-
-## of
-[Applicative][4]
-```
-of :: a -> Future of a
-```
-```javascript
-Future.of(6)
-//=> Future(6)
-
-Future.of(Future.of(6))
-//=> Future(Future(6))
-```
-
-## inspect
-```
-inspect :: () -> String
-```
-```javascript
-Future(5).inspect()
-//=> Future(5)
-```
-
-# ऊंचा Oncha Compose
+# Higher Order
+## Compose
 Compose takes n functions as arguments and return a function.
 
 ``` javascript
@@ -496,9 +330,27 @@ const logTransform = compose(log, transform)
 
 logTransform('Hello exalted one')
 //=> 'HELLO EXALTED ONE!'
+
+// supports miltiple arguments
+compose(path.normalize, path.join)('./exalted', '/one')
+//=> './exalted/one'
 ```
 
-# ऊंचा Oncha Fork
+## Curry
+Creates a partially applicable function.
+
+``` javascript
+import curry from 'oncha/curry'
+
+const curried = curry((a, b) => a * b)
+curried(3)(6)
+//=> 18
+
+curry((a, b, c) => a + b + c)(1, 2, 3)
+//=> 6
+```
+
+## Fork
 Fork as partial application and first class.
 
 ``` javascript
@@ -511,18 +363,14 @@ fork(a => a)(b => b)(fut)
 //=> 'EXALTED!'
 ```
 
-# ऊंचा Oncha Curry
-Creates a partially applicable function.
+## Map
+Map as partial application and first class with arity support.
 
 ``` javascript
-import curry from 'oncha/curry'
+import fork from 'oncha/map'
 
-const curried = curry((a, b) => a * b)
-curried(3)(6)
-// 18
-
-curry((a, b, c) => a + b + c)(1, 2, 3)
-// 6
+map(a => a + 1, a => a * 3)([1, 2, 3])
+//=> [4, 7, 10]
 ```
 
 [1]: https://github.com/fantasyland/fantasy-land#setoid
