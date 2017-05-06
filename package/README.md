@@ -173,7 +173,6 @@ curry((a, b, c) => a + b + c)(1, 2, 3)
 // 6
 ```
 
-
 [1]: https://github.com/fantasyland/fantasy-land#setoid
 [2]: https://github.com/fantasyland/fantasy-land#semigroup
 [3]: https://github.com/fantasyland/fantasy-land#functor
