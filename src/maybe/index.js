@@ -3,6 +3,8 @@ import isNull from 'isNull'
 
 // Nothing :: _ -> Nothing
 const Nothing = () => ({
+  // ap :: Applicative -> Nothing
+  ap: () => Nothing(),
   // chain :: ƒ -> Nothing
   chain: () => Nothing(),
   // map :: ƒ -> Nothing
@@ -24,6 +26,8 @@ const Maybe = x =>
       nulled
         ? Nothing()
         : {
+            // ap :: Applicative -> Applicative
+            ap: app => app.map(f => f(x)),
             // chain :: ƒ -> Any
             chain: f => f(x),
             // equals :: Right -> Boolean

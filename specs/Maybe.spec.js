@@ -68,4 +68,32 @@ describe('A Maybe', () => {
     it('should equal the result of another equal (transitivity)', () =>
       assert.equal(a.equals(b) === b.equals(c) === a.equals(c), true))
   })
+
+  describe('as a applicative', () => {
+    const add = a => b => a + b
+    const mul = a => b => a * b
+    const a = Maybe(mul(10))
+    const u = Maybe(add(7))
+    const v = Maybe(10)
+
+    it('is an Apply', () =>
+      assert.deepEqual(
+        v.ap(u.ap(a.map(f => g => x => f(g(x))))).inspect(),
+        v.ap(u).ap(a).inspect()))
+    it('is an Apply solves to 170', () =>
+      assert.deepEqual(v.ap(u.ap(a.map(f => g => x => f(g(x))))).fold(), 170))
+    it('is an Apply solves to 170', () =>
+      assert.deepEqual(v.ap(u).ap(a).fold(), 170))
+
+    it('is an Applicative identity', () =>
+      assert.equal(v.ap(Maybe.of(x => x)).inspect(), v.inspect()))
+    it('is an Applicative homomorphism', () =>
+      assert.equal(
+        Maybe.of(10).ap(Maybe.of(add(78))).inspect(),
+        Maybe.of(add(78)(10)).inspect()))
+    it('is an Applicative interchange', () =>
+      assert.equal(
+        Maybe.of(10).ap(u).inspect(),
+        u.ap(Maybe.of(f => f(10))).inspect()))
+  })
 })
