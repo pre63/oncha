@@ -32,5 +32,5 @@ module.exports = {
     extensions: ['.js'],
     modules: [path.resolve('src'), 'node_modules'],
   },
-  plugins: [new webpack.optimize.UglifyJsPlugin()],
+ // plugins: [new webpack.optimize.UglifyJsPlugin()],
 }
