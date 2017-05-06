@@ -1,7 +1,7 @@
 {
   "name": "oncha",
   "description": "ऊंचा Oncha - A modular exalted javascript monadic library & functional fun.",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "homepage": "https://github.com/aldo-dev/oncha",
   "repository": "https://github.com/aldo-dev/oncha.git",
   "bugs": {
