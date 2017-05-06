@@ -5,7 +5,7 @@ const Id = x => ({
   // map :: ƒ -> Id
   map: f => Id(f(x)),
   // fold :: ƒ -> Any
-  fold: f => f(x),
+  fold: (f = a => a) => f(x),
   // ap :: ƒ -> Any
   ap: f => x(f),
   // of :: Any -> Id

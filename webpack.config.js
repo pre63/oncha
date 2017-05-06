@@ -10,6 +10,7 @@ module.exports = {
     map: './map/index.js',
     either: './either/index.js',
     list: './list/index.js',
+    fork: './fork/index.js',
     future: './future/index.js',
     id: './id/index.js',
     maybe: './maybe/index.js',
@@ -17,7 +18,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/package'),
     filename: '[name].js',
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'umd',
+    library: 'oncha',
   },
   module: {
     rules: [

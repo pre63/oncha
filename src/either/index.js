@@ -10,8 +10,8 @@ export const Right = x => ({
   chain: f => f(x),
   // map :: ƒ -> Right
   map: f => Right(f(x)),
-  // fold :: (ƒ, ƒ) -> Any
-  fold: curry((f, g) => g(x)),
+  // fold :: (a -> a, a -> a) -> Any
+  fold: curry((f, g = a => a) => g(x)),
   // inspect :: -> String
   inspect: () => `Right(${x})`
 })
@@ -26,7 +26,7 @@ export const Left = x => ({
   // map :: ƒ -> Left
   map: () => Left(x),
   // fold :: (ƒ, ƒ) -> Any
-  fold: f => f(x),
+  fold: (f = a => a) => f(x),
   // inspect :: -> String
   inspect: () => `Left(${x})`
 })
