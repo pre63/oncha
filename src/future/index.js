@@ -1,8 +1,7 @@
 import curry from 'curry'
 
 // fork :: (ƒ -> ƒ -> Any) -> ƒ -> ƒ -> Future
-const fork = action =>
-  curry((error, success) => Future.of(action(error, success)))
+const fork = action => curry((error, success) => Future.of(action(error, success)))
 
 // chain :: (ƒ -> ƒ -> Any) -> (Any -> Future) -> Future
 const chain = action => func =>
@@ -25,7 +24,6 @@ const Future = action => ({
 Future.of = x => Future((reject, resolve) => resolve(x))
 
 // fromPromise :: Promise -> Future
-Future.fromPromise = promise =>
-  Future((reject, resolve) => promise.then(resolve, reject))
+Future.fromPromise = promise => Future((reject, resolve) => promise.then(resolve, reject))
 
 export default Future

@@ -2,11 +2,9 @@ import assert from 'assert'
 import compose from '../package/compose'
 
 describe('A compose', () => {
-  it('will compose one function', () =>
-    assert.equal(compose(a => a)('exalted'), 'exalted'))
+  it('will compose one function', () => assert.equal(compose(a => a)('exalted'), 'exalted'))
 
-  it('will compose two function', () =>
-    assert.equal(compose(a => a, a => a)('exalted'), 'exalted'))
+  it('will compose two function', () => assert.equal(compose(a => a, a => a)('exalted'), 'exalted'))
 
   it('will compose three function', () =>
     assert.equal(compose(a => a, a => a, a => a)('exalted'), 'exalted'))

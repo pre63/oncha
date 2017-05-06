@@ -10,8 +10,7 @@ describe('A Id', () => {
 
     it('is an identity', () => identity(Id.of)(eq)('Functional fun!'))
 
-    it('is composable', () =>
-      composition(Id.of)(eq)(x => x)(x => x)('Functional fun!'))
+    it('is composable', () => composition(Id.of)(eq)(x => x)(x => x)('Functional fun!'))
 
     it('can do maths', () => composition(Id.of)(eq)(x => x * 2)(x => x * 7)(3))
 
@@ -33,21 +32,15 @@ describe('A Id', () => {
     it('is an Apply solves to 170', () =>
       assert.deepEqual(v.ap(u.ap(a.map(f => g => x => f(g(x))))).fold(), 170))
 
-    it('is an Apply solves to 170', () =>
-      assert.deepEqual(v.ap(u).ap(a).fold(), 170))
+    it('is an Apply solves to 170', () => assert.deepEqual(v.ap(u).ap(a).fold(), 170))
 
-    it('is an Applicative identity', () =>
-      assert.equal(v.ap(Id.of(x => x)).inspect(), v.inspect()))
+    it('is an Applicative identity', () => assert.equal(v.ap(Id.of(x => x)).inspect(), v.inspect()))
 
     it('is an Applicative homomorphism', () =>
-      assert.equal(
-        Id.of(10).ap(Id.of(add(78))).inspect(),
-        Id.of(add(78)(10)).inspect()))
+      assert.equal(Id.of(10).ap(Id.of(add(78))).inspect(), Id.of(add(78)(10)).inspect()))
 
     it('is an Applicative interchange', () =>
-      assert.equal(
-        Id.of(10).ap(u).inspect(),
-        u.ap(Id.of(f => f(10))).inspect()))
+      assert.equal(Id.of(10).ap(u).inspect(), u.ap(Id.of(f => f(10))).inspect()))
   })
 
   it('will map to uppercase', () => {
@@ -55,11 +48,11 @@ describe('A Id', () => {
   })
 
   it('of will return a new Id', () => {
-    assert.equal(Id.of('Simon').inspect(), Id('Simon').inspect())
+    assert.equal(Id.of('Exalted').inspect(), Id('Exalted').inspect())
   })
 
   it('inspect will format a correct Id', () => {
-    assert.equal(Id('Simon').inspect(), 'Id(Simon)')
+    assert.equal(Id('Exalted').inspect(), 'Id(Exalted)')
   })
 
   it('will be exactly 11', () => assert(Id(11).fold(x => x) === 11))

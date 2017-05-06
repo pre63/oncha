@@ -7,9 +7,7 @@ describe('A Future', () => {
   it('should map over the data', () =>
     Future((reject, resolve) => resolve('hello exalted one'))
       .map(toUpperCase)
-      .fork(
-        error => assert(false, error),
-        data => assert(data === 'HELLO EXALTED ONE')))
+      .fork(error => assert(false, error), data => assert(data === 'HELLO EXALTED ONE')))
 
   it('should return future after fork', () => {
     Future((reject, resolve) => {
@@ -17,9 +15,7 @@ describe('A Future', () => {
       return 'this worked'
     })
       .fork(error => assert(false, error), data => assert(data))
-      .fork(
-        error => assert(false, error),
-        data => assert(data === 'this worked'))
+      .fork(error => assert(false, error), data => assert(data === 'this worked'))
   })
 
   it('should not execute untill fork is called', () => {
@@ -92,11 +88,7 @@ describe('A Future', () => {
 
   it('should chain futures from promises', () => {
     Future.fromPromise(new Promise((fulfill, reject) => fulfill('1')))
-      .chain(data =>
-        Future.fromPromise(
-          new Promise((fulfill, reject) => fulfill(data + '2'))))
-      .fork(
-        () => assert(false, 'promise should have fulfilled'),
-        val => assert(val === '12'))
+      .chain(data => Future.fromPromise(new Promise((fulfill, reject) => fulfill(data + '2'))))
+      .fork(() => assert(false, 'promise should have fulfilled'), val => assert(val === '12'))
   })
 })

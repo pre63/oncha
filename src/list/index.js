@@ -2,8 +2,7 @@ import Id from 'id'
 import curry from 'curry'
 
 // isFunction :: Any -> Boolean
-const isFunction = func =>
-  !!(func && func.constructor && func.call && func.apply)
+const isFunction = func => !!(func && func.constructor && func.call && func.apply)
 
 // List :: Array -> List
 const List = array =>
