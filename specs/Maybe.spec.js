@@ -6,7 +6,10 @@ describe('A Maybe', () => {
     assert.equal(Maybe('Exalted').inspect(), 'Maybe(Exalted)'))
 
   it('assert else is ignored', () =>
-    Maybe('Exalted').map(x => x.toUpperCase()).else(() => 'null value').fold(x => assert(x, 'EXALTED')))
+    Maybe('Exalted')
+      .map(x => x.toUpperCase())
+      .else(() => 'null value')
+      .fold(x => assert(x, 'EXALTED')))
 
   it('assert else is executed', () =>
     Maybe()
