@@ -169,7 +169,7 @@ Maybe(Maybe(5)).chain(a => a)
 ```
 
 ## equals
-[SetoMaybe][1]
+[Setoid][1]
 ```
 equals :: Maybe -> Boolean
 ```
@@ -274,6 +274,94 @@ extractEmail({ name: 'user' }
     () => 'No email found!',
     x => x)
 //=> 'No email found!'
+```
+
+## ap
+[Applicative][4]
+```
+chain :: (a -> b) -> b
+```
+```javascript
+Right(5).chain(a => Right(a))
+//=> Right(5)
+
+// You can use chain to join the monads.
+Right(Right(5)).chain(a => a)
+//=> Right(5)
+```
+
+## chain
+[Chain][7]
+```
+chain :: (a -> b) -> b
+```
+```javascript
+Right(5).chain(a => Right(a))
+//=> Right(5)
+
+// You can use chain to join the monads.
+Right(Right(5)).chain(a => a)
+//=> Right(5)
+```
+
+## equals
+[Setoid][1]
+```
+equals :: Right -> Boolean
+```
+```javascript
+Right(1).equals(Right(1))
+//=> true
+
+Right(2).equals(Right(1))
+//=> false
+
+Right(2).equals(Right(1)) === Right(1).equals(Right(1))
+//=> false
+```
+
+## fold
+[Foldable][6]
+```
+fold :: (a => b) -> b
+```
+```javascript
+Right(5).fold()
+//=> 5
+
+Right(5).fold(a => a + 1)
+//=> 6
+```
+
+## map
+[Functor][3]
+```
+map :: (a -> b) -> Right of b
+```
+```javascript
+Right(7).map(a => a * 2)
+//=> Right(14)
+```
+
+## of
+```
+of :: a -> Right of a
+```
+```javascript
+Right(5).of(6)
+//=> Right(6)
+
+Right(5).of(Right(6))
+//=> Right(Right(6))
+```
+
+## inspect
+```
+inspect :: () -> String
+```
+```javascript
+Right(5).inspect()
+//=> Right(5)
 ```
 
 # ऊंचा Oncha List
