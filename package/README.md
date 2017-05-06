@@ -25,7 +25,7 @@ A modular exalted javascript monadic library & functional fun. [fantasy-land](ht
   * [Compose](#compose)
   * [Curry](#curry)
   * [Fork](#fork)
-  * [Map](#map-1)⏎
+  * [Map](#map-1)
 
 # Install
 ``` bash
