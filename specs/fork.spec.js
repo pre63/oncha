@@ -9,5 +9,5 @@ describe('A Fork', () => {
     assert.equal(fork(a => a)(b => b)({ fork: (a, b) => b('exalted') }), 'exalted'))
 
   it('should fork a future', () =>
-    assert.equal(fork(a => a)(b => b)(Future.of('EXALTED!')).fold(), 'EXALTED!'))
+    assert.equal(fork(a => a)(b => b)(Future.of('EXALTED!')), 'EXALTED!'))
 })

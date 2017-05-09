@@ -9,14 +9,14 @@ describe('A Future', () => {
       .map(toUpperCase)
       .fork(error => assert(false, error), data => assert(data === 'HELLO EXALTED ONE')))
 
-  it('should return future after fork', () => {
-    Future((reject, resolve) => {
-      resolve(true)
-      return 'this worked'
-    })
-      .fork(error => assert(false, error), data => assert(data))
-      .fork(error => assert(false, error), data => assert(data === 'this worked'))
-  })
+  it("should return 'this worked' after fork", () =>
+    assert(
+      Future((reject, resolve) => (resolve(true), 'this worked')).fork(
+        error => assert(false, error),
+        data => data
+      ),
+      'this worked'
+    ))
 
   it('should not execute untill fork is called', () => {
     /**
