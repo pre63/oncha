@@ -25,6 +25,6 @@ Future.of = x => Future((reject, resolve) => resolve(x))
 
 // fromPromise :: Promise -> Future
 Future.fromPromise = promise =>
-  Future((reject, resolve) => Future.of(promise.then(resolve, reject)))
+  Future((reject, resolve) => Future.fromPromise(promise.then(resolve, reject)))
 
 export default Future
