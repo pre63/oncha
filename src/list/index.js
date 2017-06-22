@@ -48,7 +48,8 @@ const List = array =>
     // some :: (Any -> Boolean) -> Boolean
     some: f => list.some(f),
     // of :: Array -> List
-    of: List
+    of: List,
+    // ap ::
   }))
 
 // Array -> List
