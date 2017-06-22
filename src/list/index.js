@@ -21,6 +21,8 @@ const List = array =>
     length: () => list.length,
     // every :: (Any -> Boolean) -> Boolean
     every: f => list.every(f),
+    // equals :: List -> Boolean
+    equals: (list2, e = a => a === x) => list2.fold(e),
     // filter :: (Any -> Boolean) -> List
     filter: f => List(list.filter(f)),
     // includes :: Any -> Boolean
