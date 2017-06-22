@@ -4,6 +4,9 @@ import isNull from 'isNull'
 // fromNullable :: Any -> Left | Right
 export const fromNullable = x => (isNull(x) ? Left : Right)(x)
 
+// isFunction :: Any -> Boolean
+const isFunction = func => !!(func && func.constructor && func.call && func.apply)
+
 // Right :: Any -> Right
 export const Right = x => ({
   // ap :: Applicative -> Applicative
@@ -42,8 +45,23 @@ export const Left = x => ({
 // of :: Any -> Left
 Left.of = x => Left(x)
 
+// callIfFunction :: (A | (a -> b)) -> (A | (a | b))
+const callIfFunction = f => (isFunction(f) ? f() : f)
+
+// cond :: (() -> Boolean) -> (() -> c) -> (() -> d) -> c | d
+// cond :: (() -> Boolean) -> c -> d -> c | d
+// cond :: Boolean -> b -> c -> b | c
+const cond = cond => left => right =>
+  callIfFunction(cond) ? callIfFunction(right) : callIfFunction(left)
+
+// fromCond :: (() -> Boolean) -> a -> b -> Either
+// fromCond :: Boolean -> a -> b -> Either
+const fromCond = cond => left => right => (callIfFunction(cond) ? Right(right) : Left(left))
+
 // Either :: Either
 export const Either = {
+  cond,
+  fromCond,
   fromNullable,
   Left,
   Right

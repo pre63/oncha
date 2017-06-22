@@ -102,4 +102,26 @@ describe('A Either', () => {
     it('is an Applicative interchange', () =>
       assert.equal(Left.of(10).ap(u).inspect(), v.ap(Left.of(f => f(10))).inspect()))
   })
+
+  describe('as a cond', () => {
+    it('will be true when the cond is a function', () =>
+      assert.equal(Either.cond(() => true)(() => false)(() => true), true))
+    it('will be false when the cond is a function', () =>
+      assert.equal(Either.cond(() => true)(() => true)(() => false), false))
+    it('will be true when the cond is a boolean', () =>
+      assert.equal(Either.cond(true)(false)(true), true))
+    it('will be true when the cond is a truly', () =>
+      assert.equal(Either.cond({})(false)(true), true))
+    it('will be true when the cond is a falsely', () =>
+      assert.equal(Either.cond(null)(true)(false), true))
+  })
+
+  describe('as a fromCond', () => {
+    it('will be true when the cond is a boolean', () =>
+      assert.equal(Either.fromCond(true)(false)(true).fold(a => a), true))
+    it('will be true when the cond is a truly', () =>
+      assert.equal(Either.fromCond({})(false)(true).fold(a => a), true))
+    it('will be true when the cond is a falsely', () =>
+      assert.equal(Either.fromCond(null)(true)(false).fold(a => a), true))
+  })
 })

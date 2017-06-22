@@ -1,20 +1,6 @@
 # ऊंचा Oncha
 A modular exalted javascript monadic library & functional fun. [fantasy-land](https://github.com/fantasyland/fantasy-land) compliant.
 
-- [Install](#install)
-- [Types](#types)
-  * [All](#all)
-  * [Id](#id)
-  * [Maybe](#maybe)
-  * [Either](#either)
-  * [List](#list)
-  * [Future](#future)
-- [Higher Order](#higher-order)
-  * [Compose](#compose)
-  * [Curry](#curry)
-  * [Fork](#fork)
-  * [Map](#map-1)
-
 # Install
 ``` bash
 yarn add oncha
@@ -187,7 +173,7 @@ Maybe(5).fold(a => a + 1)
 ```
 
 ## Either
-An Either monad includes Left, Right, fromNullable.
+An Either monad includes cond, fromCond, fromNullable, Left, Right.
 
 ``` javascript
 import Either from 'oncha/either'
@@ -219,6 +205,49 @@ extractEmail({ name: 'user' }
     () => 'No email found!',
     x => x)
 //=> 'No email found!'
+```
+
+### cond
+`A -> B -> C -> Any`
+Evaluates A when truly calls C if it is a function or return C, when falsely calls B if it is a function or returns B.
+```
+cond :: (() -> Boolean) -> (() -> c) -> (() -> d) -> c | d
+cond :: (() -> Boolean) -> c -> d -> c | d
+cond :: Boolean -> b -> c -> b | c
+```
+```javascript
+Either.cond(1 === 1)(0)(1)
+//=> 1
+
+Either.cond(() => true)(0)(1)
+//=> 1
+
+Either.cond(() => true)(() => 0)(() => 1)
+//=> 1
+
+Either.cond(true)(() => 0)(1)
+//=> 1
+```
+
+### fromCond
+`A -> B -> C -> Either`
+Evaluates A when truly return Right of C or Left or B.
+```
+fromCond :: (() -> Boolean) -> a -> b -> Either
+fromCond :: Boolean -> a -> b -> Either
+```
+```javascript
+Either.fromCond(1 === 1)(0)(1)
+//=> Right(1)
+
+Either.fromCond(() => true)(0)(1)
+//=> Right(1)
+
+Either.fromCond(() => true)(() => 0)(() => 1)
+//=> Right(1)
+
+Either.fromCond(true)(() => 0)(1)
+//=> Right(1)
 ```
 
 ### fold
