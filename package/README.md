@@ -14,7 +14,7 @@ yarn add oncha
 | [Future](#future) |    **✔︎**     |                  |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |            |     **✔︎**     |
 | [Identity](#id)   |    **✔︎**     |      **✔︎**       |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |   **✔︎**    |     **✔︎**     |
 | [Maybe](#maybe)   |    **✔︎**     |      **✔︎**       |    **✔︎**     |                |     **✔︎**    |     **✔︎**    |   **✔︎**    |     **✔︎**     |
-| [List](#list)     |    **✔︎**     |                  |    **✔︎**     |     **✔︎**      |     **✔︎**    |     **✔︎**    |            |     **✔︎**     |
+| [List](#list)     |              |                  |    **✔︎**     |     **✔︎**      |     **✔︎**    |     **✔︎**    |            |     **✔︎**     |
 
 * There is a divergence form fantasy land where `reduce` is named `fold` for some types.
 
@@ -276,6 +276,24 @@ List([2, 4, 6])
   .fold(log)
 //=> [8, 12]
 ```
+### head
+### tail
+### nth
+### concat
+### lenght
+### every
+### filter
+### includes
+### indexOf
+### inspect
+### join
+### lastIndexOf
+### map
+### reduce
+### reduceRight
+### reverse
+### slice
+### some
 
 ## Future
 A Future monad for async computation.

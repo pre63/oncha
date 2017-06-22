@@ -21,6 +21,8 @@ const List = array =>
     length: () => list.length,
     // every :: (Any -> Boolean) -> Boolean
     every: f => list.every(f),
+    // equals :: Id -> Boolean
+    equals: (list2, e = a => a === x) => list2.fold(e),
     // filter :: (Any -> Boolean) -> List
     filter: f => List(list.filter(f)),
     // includes :: Any -> Boolean
@@ -46,7 +48,8 @@ const List = array =>
     // some :: (Any -> Boolean) -> Boolean
     some: f => list.some(f),
     // of :: Array -> List
-    of: List
+    of: List,
+    // ap ::
   }))
 
 // Array -> List
