@@ -49,7 +49,6 @@ const List = array =>
     some: f => list.some(f),
     // of :: Array -> List
     of: List
-    // ap ::
   }))
 
 // Array -> List
