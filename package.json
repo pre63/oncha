@@ -4,16 +4,8 @@
   "version": "0.0.0",
   "private": true,
   "main": "index.js",
-  "author": "Simon Deshaies",
+  "author": "Simon Deshaies (@pre63)",
   "license": "Apache-2.0",
-  "contributors": [
-    "Simon Deshaies",
-    "Ysael Pepin",
-    "Guillaume Martin",
-    "Jean-Francois Dube",
-    "Olivier Leduc",
-    "Olivier Melancon"
-  ],
   "engines": {
     "node": ">=6"
   },

@@ -7,14 +7,6 @@
   "bugs": {
     "url": "https://github.com/aldo-dev/oncha/issues"
   },
-  "author": "Simon Deshaies",
-  "license": "Apache-2.0",
-  "contributors": [
-    "Simon Deshaies",
-    "Ysael Pepin",
-    "Guillaume Martin",
-    "Jean-Francois Dube",
-    "Olivier Leduc",
-    "Olivier Melancon"
-  ]
+  "author": "Simon Deshaies (@pre63)",
+  "license": "Apache-2.0"
 }
