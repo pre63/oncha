@@ -1,22 +1,29 @@
-// Id :: Any -> Id
-const Id = x => ({
-  // ap :: Applicative -> Applicative
-  ap: app => app.map(f => f(x)),
-  // chain :: ƒ -> Monad
-  chain: f => f(x),
-  // equals :: Id -> Boolean
-  equals: (id, e = a => a === x) => id.fold(e),
-  // map :: ƒ -> Id
-  map: f => Id(f(x)),
-  // fold :: ƒ -> Any
-  fold: (f = a => a) => f(x),
-  // of :: Any -> Id
-  of: x => Id(x),
-  // inspect :: -> String
-  inspect: () => `Id(${x})`
-})
+// equals a -> b -> Boolean
+const equals = a => b => a === b
 
-// of :: Any -> Id
-Id.of = x => Id(x)
+// Identity :: a -> Identity a
+const Id = function Id(a) {
+  return this instanceof Id
+    ? Object.assign(this, {
+        // ap :: Apply f -> Apply f a
+        ap: app => app.map(f => f(a)),
+        // chain :: Monad -> Monad
+        chain: monad => monad(a),
+        // equals :: Id -> Boolean
+        equals: id => id.fold(equals(a)),
+        // map :: (a -> b) -> Id b
+        map: f => Id(f(a)),
+        // fold :: a -> b -> b
+        fold: (f = a => a) => f(a),
+        // of :: a -> Id a
+        of: x => Id(x),
+        // inspect :: undefined -> String
+        inspect: () => `Id(${a})`
+      })
+    : new Id(a)
+}
+
+// of :: a -> Id a
+Id.of = Id
 
 export default Id

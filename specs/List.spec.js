@@ -7,6 +7,10 @@ const head = list.head()
 const tail = list.tail()
 
 describe('A List', () => {
+  describe('as a type', () => {
+    it('shoud be an instance of List', () => assert.equal(List.of(0) instanceof List, true))
+  })
+
   it('should have a lenght of 1 ', () => assert.equal(head.length(), 1))
 
   it('should not be an array', () => assert.equal(Array.isArray(tail), false))

@@ -3,6 +3,12 @@ import Id from '../package/id'
 import { Either, Right, Left, fromNullable } from '../package/either'
 
 describe('A Either', () => {
+  describe('as a type', () => {
+    it('Left shoud be an instance of Left', () => assert.equal(Left.of(0) instanceof Left, true))
+    it('Right shoud be an instance of Right', () =>
+      assert.equal(Right.of(0) instanceof Right, true))
+  })
+
   it('should not call the map function when created from nullable', () =>
     fromNullable(null).map(() => assert(false)).map(() => assert(false)).map(() => assert(true)))
 
@@ -21,9 +27,11 @@ describe('A Either', () => {
 
   it('should build left', () => assert.equal(Left('Exalted').inspect(), 'Left(Exalted)'))
 
-  it('should default fold right to identity', () => assert.equal(Either.fromNullable('identity').fold(x => 'asd'), 'identity'))
+  it('should default fold right to identity', () =>
+    assert.equal(Either.fromNullable('identity').fold(x => 'asd'), 'identity'))
 
-  it('should default fold left to identity', () => assert.equal(Either.fromNullable(null).fold(), null))
+  it('should default fold left to identity', () =>
+    assert.equal(Either.fromNullable(null).fold(), null))
 
   describe('as a Setoid', () => {
     const rightA = Right(2)

@@ -9,23 +9,20 @@ const chain = action => func =>
     fork(action)(e => reject(e), data => func(data).fork(reject, resolve)))
 
 // Future :: (ƒ -> ƒ -> Any) -> Future
-const Future = action => ({
-  // map :: (Any -> Any) -> Future
-  map: func => chain(action)(x => Future.of(func(x))),
-  // chain :: (Any -> Future) -> Future
-  chain: chain(action),
-  // fork :: ƒ -> ƒ -> Any
-  fork: fork(action),
-  // fold:: (a -> a) -> a
-  fold: (f = a => a) => action(f, f)
-})
-
-// of :: Any -> Future
-Future.of = x => Future((reject, resolve) => resolve(x))
-
-// fromPromise :: Promise -> Future
-Future.fromPromise = promise =>
-  Future((reject, resolve) => Future.fromPromise(promise.then(resolve, reject)))
+const Future = function Future(action) {
+  return this instanceof Future
+    ? Object.assign(this, {
+        // map :: (Any -> Any) -> Future
+        map: func => chain(action)(a => Future.of(func(a))),
+        // chain :: (Any -> Future) -> Future
+        chain: chain(action),
+        // fork :: ƒ -> (a -> b) -> b
+        fork: fork(action),
+        // fold:: (a -> b) -> b
+        fold: (f = a => a) => action(f, f)
+      })
+    : new Future(action)
+}
 
 // countSparse :: Array -> Number
 const countSparse = arr => arr.filter(x => x !== undefined).length
@@ -44,6 +41,13 @@ const all = futures =>
         ), results),
       []
     ))
+
+// of :: a -> Future a
+Future.of = a => Future((reject, resolve) => resolve(a))
+
+// fromPromise :: Promise a -> Future a
+Future.fromPromise = promise =>
+  Future((reject, resolve) => Future.fromPromise(promise.then(resolve, reject)))
 
 // all :: [Future] -> Future
 Future.all = (...futures) => all([].concat(...futures))

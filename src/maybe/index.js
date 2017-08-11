@@ -1,50 +1,61 @@
 import Id from 'id'
 import isNull from 'isNull'
 
-// Nothing :: _ -> Nothing
-const Nothing = () => ({
-  // ap :: Applicative -> Nothing
-  ap: () => Nothing(),
-  // chain :: ƒ -> Nothing
-  chain: () => Nothing(),
-  // map :: ƒ -> Nothing
-  map: () => Nothing(),
-  // else :: ƒ -> Maybe
-  else: f => Maybe(f()),
-  // fold :: ƒ -> Any
-  fold: (f = a => a) => f(),
-  // Any -> Maybe
-  of: x => Maybe(x),
-  // inspect :: ƒ -> String
-  inspect: () => 'Nothing()'
-})
+// equals a -> b -> Boolean
+const equals = a => b => a === b
 
-// Maybe :: Any -> Maybe
-const Maybe = x =>
-  Id(x).map(isNull).fold(
-    nulled =>
-      nulled
-        ? Nothing()
-        : {
-            // ap :: Applicative -> Applicative
-            ap: app => app.map(f => f(x)),
-            // chain :: ƒ -> Any
-            chain: f => f(x),
-            // equals :: Right -> Boolean
-            equals: (r, e = a => a === x) => r.fold(e, e),
-            // map :: ƒ -> Maybe
-            map: f => Maybe(f(x)),
-            // fold :: ƒ -> Any
-            fold: (f = a => a) => f(x),
-            // else :: ƒ -> Maybe
-            else: () => Maybe(x),
-            // Any -> Maybe
-            of: x => Maybe(x),
-            // inspect :: -> String
-            inspect: () => `Maybe(${x})`
-          })
+// Nothing :: () -> Nothing
+const Nothing = function Nothing() {
+  return this instanceof Nothing
+    ? Object.assign(this, {
+        // ap :: Applicative -> Nothing
+        ap: () => Nothing(),
+        // chain :: ƒ -> Nothing
+        chain: () => Nothing(),
+        // map :: ƒ -> Nothing
+        map: () => Nothing(),
+        // else :: ƒ -> Maybe
+        else: f => Maybe(f()),
+        // equals :: Nothing -> Boolean
+        equals: id => id.fold(equals()),
+        // fold :: (a -> b) -> b
+        fold: (f = a => a) => f(),
+        // Any -> Maybe
+        of: a => Maybe(a),
+        // inspect :: () -> String
+        inspect: () => 'Nothing()'
+      })
+    : new Nothing()
+}
 
-// Any -> Maybe
-Maybe.of = x => Maybe(x)
+// getType :: a -> Maybe | Nothing
+const getType = a => (isNull(a) ? Nothing : Maybe)
+
+// Maybe :: a -> Maybe a
+const Maybe = function Maybe(a) {
+  return this instanceof Maybe
+    ? Object.assign(this, {
+        // ap :: Apply f -> Apply f a
+        ap: app => app.map(f => f(a)),
+        // chain :: Monad -> Monad
+        chain: monad => monad(a),
+        // else :: ƒ -> Maybe
+        else: () => Maybe(a),
+        // equals :: Maybe -> Boolean
+        equals: id => id.fold(equals(a)),
+        // map :: (a -> b) -> Maybe b
+        map: f => Maybe(f(a)),
+        // fold :: (a -> b) -> b
+        fold: (f = a => a) => f(a),
+        // of :: a -> Maybe a
+        of: a => Maybe(a),
+        // inspect :: undefined -> String
+        inspect: () => `Maybe(${a})`
+      })
+    : new (getType(a))(a)
+}
+
+// of :: a -> Maybe a
+Maybe.of = a => Maybe(a)
 
 export default Maybe

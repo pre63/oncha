@@ -4,6 +4,10 @@ import Future from '../package/future'
 const toUpperCase = s => s.toUpperCase()
 
 describe('A Future', () => {
+  describe('as a type', () => {
+    it('shoud be an instance of Future', () => assert.equal(Future.of(0) instanceof Future, true))
+  })
+
   it('should map over the data', () =>
     Future((reject, resolve) => resolve('hello exalted one'))
       .map(toUpperCase)

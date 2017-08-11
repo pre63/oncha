@@ -5,6 +5,10 @@ import { identity, composition } from '../src/laws/functor'
 import { associativity } from '../src/laws/chain'
 
 describe('A Id', () => {
+  describe('as a type', () => {
+    it('shoud be an instance of Id', () => assert.equal(Id.of(0) instanceof Id, true))
+  })
+
   describe('as a monad', () => {
     const eq = (a, b) => assert(a.inspect() === b.inspect())
 

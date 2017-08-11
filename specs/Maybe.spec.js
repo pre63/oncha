@@ -2,6 +2,10 @@ import assert from 'assert'
 import Maybe from '../package/maybe'
 
 describe('A Maybe', () => {
+  describe('as a type', () => {
+    it('shoud be an instance of Maybe', () => assert.equal(Maybe.of(0) instanceof Maybe, true))
+  })
+
   it('assert inspect will return a formatted maybe', () =>
     assert.equal(Maybe('Exalted').inspect(), 'Maybe(Exalted)'))
 
